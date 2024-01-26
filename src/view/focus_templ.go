@@ -12,8 +12,8 @@ import "bytes"
 
 func focusScript() templ.ComponentScript {
 	return templ.ComponentScript{
-		Name: `__templ_focusScript_23c6`,
-		Function: `function __templ_focusScript_23c6(){var start = new Date().getTime();
+		Name: `__templ_focusScript_1b52`,
+		Function: `function __templ_focusScript_1b52(){var start = new Date().getTime();
 
   let x = setInterval(() => {
     var elapsed = new Date().getTime() - start;
@@ -26,6 +26,7 @@ func focusScript() templ.ComponentScript {
 
     var f = ` + "`" + `${padZeroes(hours)}:${padZeroes(minutes)}:${padZeroes(seconds)}` + "`" + `;
     document.getElementById("counter").innerHTML = f;
+    document.getElementById("title").innerHTML = f + " | GoMato";
     document.getElementById("pause-button").value = elapsed;
     totalElapsed = elapsed;
   }, 1000);
@@ -42,8 +43,8 @@ func focusScript() templ.ComponentScript {
   function padZeroes(num) {
     return (num < 10 ? "0" : "") + num;
   }}`,
-		Call:       templ.SafeScript(`__templ_focusScript_23c6`),
-		CallInline: templ.SafeScriptInline(`__templ_focusScript_23c6`),
+		Call:       templ.SafeScript(`__templ_focusScript_1b52`),
+		CallInline: templ.SafeScriptInline(`__templ_focusScript_1b52`),
 	}
 }
 

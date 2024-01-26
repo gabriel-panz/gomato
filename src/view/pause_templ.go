@@ -12,14 +12,15 @@ import "bytes"
 
 func pauseScript(startTime int) templ.ComponentScript {
 	return templ.ComponentScript{
-		Name: `__templ_pauseScript_21fe`,
-		Function: `function __templ_pauseScript_21fe(startTime){var start = new Date().getTime() + startTime;
+		Name: `__templ_pauseScript_9ae9`,
+		Function: `function __templ_pauseScript_9ae9(startTime){var start = new Date().getTime() + startTime;
   document.getElementById("counter").innerHTML = toTimeString(startTime);
 
   let y = setInterval(() => {
     var elapsed = start - new Date().getTime();
     let f = toTimeString(elapsed);
     document.getElementById("counter").innerHTML = f;
+    document.getElementById("title").innerHTML = f + " | GoMato";
   }, 1000);
 
   function padZeroes(num) {
@@ -43,8 +44,8 @@ func pauseScript(startTime int) templ.ComponentScript {
   function clear() {
     clearInterval(y)
   }}`,
-		Call:       templ.SafeScript(`__templ_pauseScript_21fe`, startTime),
-		CallInline: templ.SafeScriptInline(`__templ_pauseScript_21fe`, startTime),
+		Call:       templ.SafeScript(`__templ_pauseScript_9ae9`, startTime),
+		CallInline: templ.SafeScriptInline(`__templ_pauseScript_9ae9`, startTime),
 	}
 }
 

@@ -8,6 +8,7 @@ script pauseScript(startTime int) {
     var elapsed = start - new Date().getTime();
     let f = toTimeString(elapsed);
     document.getElementById("counter").innerHTML = f;
+    document.getElementById("title").innerHTML = f + " | GoMato";
   }, 1000);
 
   function padZeroes(num) {
