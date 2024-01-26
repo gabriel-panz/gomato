@@ -12,5 +12,5 @@ func main() {
 	app.GET("/focus", handler.HandleShowFocus)
 	app.POST("/pause", handler.HandleShowPause)
 
-	app.Logger.Fatal(app.Start("127.0.0.1:9000"))
+	app.Logger.Fatal(app.Start(":9000"))
 }
