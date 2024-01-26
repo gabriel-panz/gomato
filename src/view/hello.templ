@@ -1,0 +1,28 @@
+package view
+
+templ Hello() {
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>GoMato</title>
+		</head>
+		<body>
+			<header>
+				<h1>Gomato</h1>
+			</header>
+			<main>
+				<article id="clock">
+					<h1>Press Start</h1>
+					<b>00:00:00</b>
+					<button hx-get="/focus" hx-target="#clock" hx-swap="outerHTML">Start Focus</button>
+				</article>
+			</main>
+			<footer>
+				<p>made in go+htmx</p>
+				<a href="http://github.com/gabriel-panz" target="_blank" rel="external noreferrer noopener">GitHub</a>
+			</footer>
+		</body>
+		<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+	</html>
+}

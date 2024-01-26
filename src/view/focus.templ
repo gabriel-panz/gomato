@@ -1,0 +1,42 @@
+package view
+
+script focusScript() {
+  var start = new Date().getTime();
+
+  let x = setInterval(() => {
+    var elapsed = new Date().getTime() - start;
+
+    var hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (60 * 60 * 1000));
+
+    var minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (60 * 1000));
+
+    var seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+
+    var f = `${padZeroes(hours)}:${padZeroes(minutes)}:${padZeroes(seconds)}`;
+    document.getElementById("counter").innerHTML = f;
+    document.getElementById("pause-button").value = elapsed;
+    totalElapsed = elapsed;
+  }, 1000);
+
+  document.getElementById("clock").addEventListener('htmx:beforeSend', function(evt) {
+    clear()
+  });
+
+  function clear() {
+    console.log("clearing")
+    clearInterval(x)
+  }
+
+  function padZeroes(num) {
+    return (num < 10 ? "0" : "") + num;
+  }
+}
+
+templ Focus() {
+	<article id="clock">
+		<h1>Focus Mode</h1>
+		<b id="counter">00:00:00</b>
+		<button onclick="clear()" id="pause-button" hx-post="/pause" value="0" name="time" hx-swap="outerHTML" hx-target="#clock">Start Pause</button>
+		@focusScript()
+	</article>
+}

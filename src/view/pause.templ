@@ -1,0 +1,43 @@
+package view
+
+script pauseScript(startTime int) {
+  var start = new Date().getTime() + startTime;
+  document.getElementById("counter").innerHTML = toTimeString(startTime);
+
+  let y = setInterval(() => {
+    var elapsed = start - new Date().getTime();
+    let f = toTimeString(elapsed);
+    document.getElementById("counter").innerHTML = f;
+  }, 1000);
+
+  function padZeroes(num) {
+    return (num < 10 ? "0" : "") + num;
+  }
+
+  function toTimeString(ms) {
+    if (ms <= 0) return "00:00:00"
+
+    var hours = Math.floor((ms % (1000 * 60 * 60 * 24)) / (60 * 60 * 1000));
+    var minutes = Math.floor((ms % (1000 * 60 * 60)) / (60 * 1000));
+    var seconds = Math.floor((ms % (1000 * 60)) / 1000);
+
+    return `${padZeroes(hours)}:${padZeroes(minutes)}:${padZeroes(seconds)}`;
+  }
+
+  document.getElementById("clock").addEventListener('htmx:beforeSend', function(evt) {
+    clear()
+  });
+
+  function clear() {
+    clearInterval(y)
+  }
+}
+
+templ Pause(startTime int) {
+	<article id="clock">
+		<h1>On Break...</h1>
+		<b id="counter"></b>
+		<button id="play-button" hx-get="/focus" hx-swap="outerHTML" hx-target="#clock">Start Focus</button>
+		@pauseScript(startTime)
+	</article>
+}
