@@ -37,6 +37,8 @@ func (repo *TimerConfigRepository) GetAllConfigs() ([]localTypes.TimerConfig, er
 	if err != nil {
 		return nil, err
 	}
+	defer rs.Close()
+
 	for rs.Next() {
 		c := &localTypes.TimerConfig{}
 		err := rs.Scan(&c.Id, &c.Name, &c.WorkTime, &c.PauseTime, &c.NotificationLevel)
