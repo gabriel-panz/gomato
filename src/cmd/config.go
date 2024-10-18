@@ -16,7 +16,7 @@ var IsList bool = false
 
 var configCmd = &cobra.Command{
 	Use:   "config",
-	Short: "A brief description of your command",
+	Short: "Create a configuration for your timers",
 	Long: `Create or list your pre-configured timers, you'll be guided through the creation by a sequence of prompts. For example:
 create a new configuration:
 	config

@@ -8,13 +8,13 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "gomato",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
+	Short: "An easy to use Pomodoro for the CLI.",
+	Long: `Gomato is an easy to use Pomodoro/Flowmodoro for the CLI.
+You can use the default configurations, change the timers for every work session
+or create a configuration to save your work/break timer preferences. Get started with:
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+  gomato start
+`,
 }
 
 func Execute() {
