@@ -1,7 +1,10 @@
 package service
 
 import (
+	"bufio"
+	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"github.com/gabriel-panz/gomato/types"
@@ -82,4 +85,45 @@ func renderProgress(p *Timer, c *types.TimerConfig) {
 			pbar.RenderBlank()
 		}
 	}
+}
+
+func (p *Timer) StartFlow() {
+	p.ti = time.NewTicker(time.Second)
+	done := make(chan bool)
+	startT := time.Now()
+	var cT time.Duration
+	resting := false
+
+	go waitInput(done)
+
+	for {
+		select {
+		case <-done:
+			if resting {
+				resting = false
+				startT = time.Now()
+				fmt.Printf("\r%s", time.Since(startT))
+			} else {
+				resting = true
+				cT = time.Since(startT) / 5
+				fmt.Printf("\r%s", cT.Round(time.Second))
+			}
+			go waitInput(done)
+		case <-p.ti.C:
+			if resting {
+				cT -= time.Second
+				cT = cT.Round(time.Second)
+			} else {
+				cT = time.Since(startT)
+				cT = cT.Round(time.Second)
+			}
+			fmt.Printf("\r%s", cT)
+		}
+	}
+}
+
+func waitInput(done chan bool) {
+	input := bufio.NewScanner(os.Stdin)
+	input.Scan()
+	done <- true
 }
